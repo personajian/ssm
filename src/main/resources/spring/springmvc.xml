@@ -5,15 +5,26 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-    <!--启用注解驱动的mvc组件-->
+
+    <!--启用注解驱动的mvc组件:
+    主要是HandlerMapping,HandlerApdapter中的@RequestMapping一定需要结合注解驱动才能使用！-->
     <mvc:annotation-driven/>
+
     <!--包扫描器 扫描@Controller-->
-    <context:component-scan base-package="com.liuhang.controller"/>
+    <!--
+    <context:component-scan base-package="cn.edu.seu.homecontroller"/>
+    context组件扫描，会将所有@component扫描到SpringMVC容器中；而SpringMVC应该各司其职，只扫描注册MVC层面的组件：@Controller
+    -->
+    <context:component-scan base-package="cn.edu.seu" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>
+
     <!--配置视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+
     <!-- 配置静态资源映射：两个*，它表示映射resources/下所有的URL，包括子路径（即接多个/）-->
     <mvc:resources mapping="/js/**" location="/WEB-INF/js/"/>
     <mvc:resources mapping="/css/**" location="/WEB-INF/css/"/>

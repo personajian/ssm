@@ -18,10 +18,11 @@
     <!--配置SqlSessionFactory-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="configLocation" value="classpath:mybatis/MybatisConfig.xml"/>
+        <!--<property name="mapperLocations" value="classpath*:mapper/*/*.xml"/>-->
         <property name="dataSource" ref="dataSource"/>
     </bean>
     <!--扫描mapper接口生成的代理对象放到spring容器中-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.taotao.manager.mapper"/>
+        <property name="basePackage" value="cn.edu.seu.*.dao"/>
     </bean>
 </beans>

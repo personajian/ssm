@@ -24,6 +24,6 @@
     </tx:advice>
     <aop:config>
         <aop:advisor advice-ref="txAdvice"
-                     pointcut="execution(* com.liuhang.service.*.*(..))"/>
+                     pointcut="execution(* cn.edu.seu.home.service.*.*(..))"/>
     </aop:config>
 </beans>
